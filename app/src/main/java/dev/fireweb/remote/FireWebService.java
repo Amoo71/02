@@ -21,6 +21,9 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
 import java.net.Inet4Address;
@@ -30,6 +33,8 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URLDecoder;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,6 +52,7 @@ public class FireWebService extends Service {
     private static final int NOTIFICATION_ID = 8765;
     private static final String CHANNEL_ID = "fireweb_remote";
     private static final long IDLE_TIMEOUT_MS = 30_000L;
+    private static final String UPDATE_URL = "https://raw.githubusercontent.com/Amoo71/02/main/dist/FireWebRemote.apk";
 
     private volatile long lastActiveAt = SystemClock.elapsedRealtime();
     private volatile boolean running;
@@ -188,11 +194,16 @@ public class FireWebService extends Service {
             return jsonResponse(resultJson("Remote", adb("input keyevent " + code)));
         }
 
+        if ("/api/update".equals(path)) {
+            markActive();
+            return jsonResponse(updateJson());
+        }
+
         if ("/api/tool".equals(path)) {
             markActive();
             String type = param(query, "type");
             if ("kill-background".equals(type)) return jsonResponse(resultJson("Clean background", adb("am kill-all")));
-            if ("trim-cache".equals(type)) return jsonResponse(resultJson("Trim caches", adb("pm trim-caches 999999999999")));
+            if ("trim-cache".equals(type)) return jsonResponse(resultJson("Trim caches", adb("pm trim-caches 999999999999"));
             if ("sleep".equals(type)) {
                 String r = adb("input keyevent 223");
                 forceIdle();
@@ -292,6 +303,72 @@ public class FireWebService extends Service {
             return new Response(200, "image/png", data);
         } catch (Exception e) {
             return textResponse(404, "text/plain; charset=utf-8", "icon unavailable");
+        }
+    }
+
+    private String updateJson() {
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(UPDATE_URL + "?t=" + System.currentTimeMillis());
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setInstanceFollowRedirects(true);
+            conn.setConnectTimeout(12000);
+            conn.setReadTimeout(30000);
+            conn.setRequestProperty("User-Agent", "FireWebRemote/2.1");
+            int code = conn.getResponseCode();
+            if (code < 200 || code >= 300) {
+                return "{\"ok\":false,\"error\":\"Download failed: HTTP " + code + "\"}";
+            }
+
+            File update = new File(getFilesDir(), "update.apk");
+            InputStream in = conn.getInputStream();
+            FileOutputStream fos = new FileOutputStream(update, false);
+            byte[] buf = new byte[8192];
+            long total = 0;
+            int n;
+            while ((n = in.read(buf)) > 0) {
+                fos.write(buf, 0, n);
+                total += n;
+                if (total > 20L * 1024L * 1024L) throw new Exception("APK too large");
+            }
+            fos.flush();
+            fos.close();
+            in.close();
+
+            if (total < 12000) throw new Exception("Downloaded APK is too small");
+            FileInputStream check = new FileInputStream(update);
+            int p = check.read();
+            int k = check.read();
+            check.close();
+            if (p != 'P' || k != 'K') throw new Exception("Downloaded file is not an APK");
+
+            String staged = adb("run-as dev.fireweb.remote cat files/update.apk > /data/local/tmp/FireWebRemote.apk && echo STAGED");
+            if (!staged.contains("STAGED")) throw new Exception("Could not stage APK: " + staged);
+
+            // Preserve the local ADB RSA key in case Android requires a full uninstall
+            // because a GitHub debug build was signed with a different ephemeral key.
+            adb("run-as dev.fireweb.remote cat shared_prefs/adb_keys.xml > /data/local/tmp/fireweb-adb-keys.xml 2>/dev/null; true");
+
+            String script =
+                    ("sleep 3; " +
+                    "if pm install -r /data/local/tmp/FireWeb.apk; then " +
+                    "  am start -n dev.fireweb.remote/.MainActivity; " +
+                    "else " +
+                    "  pm uninstall dev.fireweb.remote; " +
+                    "  pm install /data/local/tmp/FireWeb.apk; " +
+                    "  run-as dev.fireweb.remote mkdir -p shared_prefs; " +
+                    "  if [ -s /data/local/tmp/fireweb-adb-keys.xml ]; then " +
+                    "    cat /data/local/tmp/fireweb-adb-keys.xml | run-as dev.fireweb.remote sh -c 'cat > shared_prefs/adb_keys.xml'; " +
+                    "  fi; " +
+                    "  am start -n dev.fireweb.remote/.MainActivity; " +
+                    "fi) >/data/local/tmp/fireweb-update.log 2>&1 &";
+            adb(script);
+
+            return "{\"ok\":true,\"message\":\"Update downloaded. Fire Control will restart in a few seconds.\",\"restarting\":true}";
+        } catch (Exception e) {
+            return "{\"ok\":false,\"error\":\"" + json(e.getMessage() == null ? e.toString() : e.getMessage()) + "\"}";
+        } finally {
+            if (conn != null) conn.disconnect();
         }
     }
 
