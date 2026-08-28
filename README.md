@@ -1,47 +1,42 @@
-# Fire Web Remote 2.0
+# Fire Web Remote 2.1
 
-Lightweight Fire TV background controller with a modern local web UI on **port 8765**.
+Lightweight Fire TV background controller with a local iPhone-first web UI on **port 8765**.
 
-## Included
+## 2.1
 
-- Auto-start after Fire TV reboot.
-- Foreground service with no periodic polling.
-- **Ultra Idle after 30 seconds without an operation.**
-- In Ultra Idle the website only exposes **Wake** (plus read-only status).
-- Wake re-enables operations for 30 seconds and sends `KEYCODE_WAKEUP`.
-- English macOS-like dark web interface.
-- Installed app list with search, sorting, system-app toggle and browser-persistent Hide/Unhide.
-- Launch and Force Stop actions for installed apps.
-- Quick launch for SmartTube (`org.smarttube.stable`) and VPN (`net.vypn.app`).
-- Maintenance tools: `am kill-all`, cache trimming, Home, Back and Sleep.
-- No arbitrary remote shell endpoint.
-
-## Build
-
-The complete Android source is stored directly in this repository. GitHub Actions builds the debug APK automatically from `main`.
+- Single-screen mobile layout with no page scrolling.
+- Apps / Remote / Tools tabs.
+- Nintendo/handheld-style paged app grid with real installed-app icons.
+- Search, system-app filter, Hide/Unhide, Open and Force Stop.
+- Remote D-pad: Up/Down/Left/Right/OK plus Home, Back, Menu, Mute and Volume +/-.
+- SmartTube and VYPN quick launch.
+- Background-process cleanup and cache trimming.
+- 30-second Ultra Idle starts only after actual web use stops. Active visible use sends a lightweight keepalive.
+- Wake-only UI while idle.
+- Stable download name: `dist/FireWebRemote.apk`.
+- Self-update API downloads the latest APK and restarts the controller.
+- Package ID remains `dev.fireweb.remote`.
 
 ## Install
 
-Download the `FireWebRemote-2.0-APK` artifact from the latest successful GitHub Actions run, extract it, then:
-
-```bash
-adb connect FIRE-TV-IP:5555
-adb install -r FireWebRemote-2.0-debug.apk
-adb shell am start -n dev.fireweb.remote/.MainActivity
-```
-
-Open on the iPhone:
+Open on the iPhone after installation:
 
 ```text
 http://FIRE-TV-IP:8765
 ```
 
-ADB debugging must remain enabled. On the first remote action Fire TV may ask you to approve the embedded ADB RSA key once.
+ADB debugging must remain enabled because Fire Web Remote uses the Fire TV's local ADB service for remote-control actions.
 
-## Power behavior
+## Updates
 
-The HTTP server blocks while waiting for connections and has no polling loop. No permanent wake lock is held. `/api/wake` uses only a short five-second partial wake lock. The listener itself must stay alive so the iPhone can wake the controller over the LAN.
+The latest build is always published as:
+
+```text
+https://raw.githubusercontent.com/Amoo71/02/main/dist/FireWebRemote.apk
+```
+
+Because GitHub debug builds can receive different debug signing certificates between runners, the first transition from an older build can require one uninstall/reinstall. The 2.1 updater is designed to handle later replacement attempts itself and preserve the local ADB authorization data where Fire OS permits it.
 
 ## Security
 
-Use this only on a trusted LAN. Do not expose port 8765 to the internet.
+The HTTP service is intended only for a trusted local network. Do not expose port 8765 to the internet. There is no arbitrary remote shell endpoint.
