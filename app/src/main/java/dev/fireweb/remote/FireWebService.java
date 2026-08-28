@@ -8,6 +8,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -27,11 +30,14 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -45,7 +51,8 @@ public class FireWebService extends Service {
     private volatile long lastActiveAt = SystemClock.elapsedRealtime();
     private volatile boolean running;
     private ServerSocket serverSocket;
-    private final ExecutorService pool = Executors.newFixedThreadPool(2);
+    private final ExecutorService pool = Executors.newFixedThreadPool(3);
+    private final Map<String, byte[]> iconCache = new ConcurrentHashMap<String, byte[]>();
     private String cachedIndex;
 
     @Override
@@ -136,20 +143,33 @@ public class FireWebService extends Service {
 
     private Response route(String path, String query) {
         if ("/".equals(path) || "/index.html".equals(path)) {
-            return new Response(200, "text/html; charset=utf-8", loadIndex());
+            return textResponse(200, "text/html; charset=utf-8", loadIndex());
         }
         if ("/api/status".equals(path)) return jsonResponse(statusJson());
         if ("/api/wake".equals(path)) return jsonResponse(wakeJson());
 
         if (isIdle()) {
-            return new Response(423, "application/json; charset=utf-8",
+            return textResponse(423, "application/json; charset=utf-8",
                     "{\"ok\":false,\"idle\":true,\"error\":\"Device is in Ultra Idle. Wake it first.\"}");
+        }
+
+        if ("/api/keepalive".equals(path)) {
+            markActive();
+            return jsonResponse("{\"ok\":true,\"remainingMs\":" + IDLE_TIMEOUT_MS + "}");
         }
 
         if ("/api/apps".equals(path)) {
             markActive();
             return jsonResponse(appsJson());
         }
+
+        if ("/api/icon".equals(path)) {
+            markActive();
+            String pkg = param(query, "package");
+            if (!isSafePackage(pkg)) return badRequest("Invalid package name");
+            return iconResponse(pkg);
+        }
+
         if ("/api/action".equals(path)) {
             markActive();
             String type = param(query, "type");
@@ -159,13 +179,20 @@ public class FireWebService extends Service {
             if ("force-stop".equals(type)) return jsonResponse(resultJson("Force stop", adb("am force-stop " + pkg)));
             return badRequest("Unknown action");
         }
+
+        if ("/api/remote".equals(path)) {
+            markActive();
+            String key = param(query, "key");
+            int code = keyCode(key);
+            if (code < 0) return badRequest("Unknown remote key");
+            return jsonResponse(resultJson("Remote", adb("input keyevent " + code)));
+        }
+
         if ("/api/tool".equals(path)) {
             markActive();
             String type = param(query, "type");
             if ("kill-background".equals(type)) return jsonResponse(resultJson("Clean background", adb("am kill-all")));
             if ("trim-cache".equals(type)) return jsonResponse(resultJson("Trim caches", adb("pm trim-caches 999999999999")));
-            if ("home".equals(type)) return jsonResponse(resultJson("Home", adb("input keyevent 3")));
-            if ("back".equals(type)) return jsonResponse(resultJson("Back", adb("input keyevent 4")));
             if ("sleep".equals(type)) {
                 String r = adb("input keyevent 223");
                 forceIdle();
@@ -173,7 +200,23 @@ public class FireWebService extends Service {
             }
             return badRequest("Unknown tool");
         }
-        return new Response(404, "application/json; charset=utf-8", "{\"ok\":false,\"error\":\"Not found\"}");
+
+        return textResponse(404, "application/json; charset=utf-8", "{\"ok\":false,\"error\":\"Not found\"}");
+    }
+
+    private int keyCode(String key) {
+        if ("up".equals(key)) return 19;
+        if ("down".equals(key)) return 20;
+        if ("left".equals(key)) return 21;
+        if ("right".equals(key)) return 22;
+        if ("ok".equals(key)) return 23;
+        if ("home".equals(key)) return 3;
+        if ("back".equals(key)) return 4;
+        if ("menu".equals(key)) return 82;
+        if ("volup".equals(key)) return 24;
+        if ("voldown".equals(key)) return 25;
+        if ("mute".equals(key)) return 164;
+        return -1;
     }
 
     private String statusJson() {
@@ -186,11 +229,10 @@ public class FireWebService extends Service {
 
     private String wakeJson() {
         markActive();
-        PowerManager.WakeLock lock = null;
         try {
             PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
             if (pm != null) {
-                lock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "FireWebRemote:wake");
+                PowerManager.WakeLock lock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "FireWebRemote:wake");
                 lock.acquire(5000);
             }
         } catch (Exception e) {
@@ -230,6 +272,29 @@ public class FireWebService extends Service {
         }
     }
 
+    private Response iconResponse(String pkg) {
+        try {
+            byte[] cached = iconCache.get(pkg);
+            if (cached != null) return new Response(200, "image/png", cached);
+
+            PackageManager pm = getPackageManager();
+            Drawable drawable = pm.getApplicationIcon(pkg);
+            int size = 96;
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, size, size);
+            drawable.draw(canvas);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 92, out);
+            bitmap.recycle();
+            byte[] data = out.toByteArray();
+            if (data.length > 0) iconCache.put(pkg, data);
+            return new Response(200, "image/png", data);
+        } catch (Exception e) {
+            return textResponse(404, "text/plain; charset=utf-8", "icon unavailable");
+        }
+    }
+
     private static String label(PackageManager pm, ApplicationInfo app) {
         try {
             CharSequence c = pm.getApplicationLabel(app);
@@ -265,15 +330,14 @@ public class FireWebService extends Service {
     }
 
     private void writeResponse(Socket socket, Response response) throws Exception {
-        byte[] bytes = response.body.getBytes("UTF-8");
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"));
         writer.write("HTTP/1.1 " + response.status + " " + statusText(response.status) + "\r\n");
         writer.write("Content-Type: " + response.contentType + "\r\n");
-        writer.write("Content-Length: " + bytes.length + "\r\n");
+        writer.write("Content-Length: " + response.body.length + "\r\n");
         writer.write("Cache-Control: no-store, no-cache, must-revalidate\r\n");
         writer.write("Pragma: no-cache\r\nConnection: close\r\nX-Content-Type-Options: nosniff\r\n\r\n");
         writer.flush();
-        socket.getOutputStream().write(bytes);
+        socket.getOutputStream().write(response.body);
         socket.getOutputStream().flush();
     }
 
@@ -305,9 +369,12 @@ public class FireWebService extends Service {
         try { return URLDecoder.decode(s, "UTF-8"); } catch (Exception e) { return s; }
     }
 
-    private static Response jsonResponse(String body) { return new Response(200, "application/json; charset=utf-8", body); }
+    private static Response jsonResponse(String body) { return textResponse(200, "application/json; charset=utf-8", body); }
     private static Response badRequest(String message) {
-        return new Response(400, "application/json; charset=utf-8", "{\"ok\":false,\"error\":\"" + json(message) + "\"}");
+        return textResponse(400, "application/json; charset=utf-8", "{\"ok\":false,\"error\":\"" + json(message) + "\"}");
+    }
+    private static Response textResponse(int status, String contentType, String body) {
+        return new Response(status, contentType, body.getBytes(StandardCharsets.UTF_8));
     }
 
     private static String statusText(int status) {
@@ -359,9 +426,13 @@ public class FireWebService extends Service {
     @Override public IBinder onBind(Intent intent) { return null; }
 
     private static class Response {
-        final int status; final String contentType; final String body;
-        Response(int status, String contentType, String body) {
-            this.status = status; this.contentType = contentType; this.body = body;
+        final int status;
+        final String contentType;
+        final byte[] body;
+        Response(int status, String contentType, byte[] body) {
+            this.status = status;
+            this.contentType = contentType;
+            this.body = body;
         }
     }
 }
