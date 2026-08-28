@@ -6,15 +6,6 @@ android {
     namespace 'dev.fireweb.remote'
     compileSdk 35
 
-    signingConfigs {
-        stableLocal {
-            storeFile file('fireweb-update.jks')
-            storePassword 'fireweb-local'
-            keyAlias 'fireweb'
-            keyPassword 'fireweb-local'
-        }
-    }
-
     defaultConfig {
         applicationId "dev.fireweb.remote"
         minSdk 22
@@ -24,11 +15,7 @@ android {
     }
 
     buildTypes {
-        debug {
-            signingConfig signingConfigs.stableLocal
-        }
         release {
-            signingConfig signingConfigs.stableLocal
             minifyEnabled false
         }
     }
