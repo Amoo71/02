@@ -30,23 +30,24 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - name: Build debug APK
+      - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
 
-      - name: Publish APK file
+      - name: Publish APK files
         run: |
           mkdir -p dist
-          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.0-debug.apk
+          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote.apk
+          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.1.apk
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f dist/FireWebRemote-2.0-debug.apk
-          git diff --cached --quiet || git commit -m "Publish FireWebRemote APK [skip ci]"
+          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.1.apk
+          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.1 APK [skip ci]"
           git push
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FireWebRemote-2.0-APK
-          path: dist/FireWebRemote-2.0-debug.apk
+          name: FireWebRemote-2.1-APK
+          path: dist/FireWebRemote.apk
           if-no-files-found: error
           retention-days: 30
