@@ -33,6 +33,9 @@ jobs:
       - name: Apply v2.1 source fix
         run: python3 scripts/fix_service_v21.py
 
+      - name: Apply compact remote layout
+        run: python3 scripts/patch_remote_layout.py
+
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
 
