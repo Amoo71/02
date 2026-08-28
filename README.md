@@ -16,9 +16,9 @@ Lightweight Fire TV background controller with a modern local web UI on **port 8
 - Maintenance tools: `am kill-all`, cache trimming, Home, Back and Sleep.
 - No arbitrary remote shell endpoint.
 
-## Source
+## Build
 
-The complete Android project is stored as `FireWebRemote-2.0-source.zip` in this repository. GitHub Actions extracts it and builds the APK automatically.
+The complete Android source is stored directly in this repository. GitHub Actions builds the debug APK automatically from `main`.
 
 ## Install
 
