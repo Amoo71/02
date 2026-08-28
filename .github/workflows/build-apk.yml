@@ -4,9 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - "dist/**"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -31,13 +33,20 @@ jobs:
       - name: Build debug APK
         run: gradle --no-daemon :app:assembleDebug
 
-      - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk FireWebRemote-2.0-debug.apk
+      - name: Publish APK file
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.0-debug.apk
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/FireWebRemote-2.0-debug.apk
+          git diff --cached --quiet || git commit -m "Publish FireWebRemote APK [skip ci]"
+          git push
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: FireWebRemote-2.0-APK
-          path: FireWebRemote-2.0-debug.apk
+          path: dist/FireWebRemote-2.0-debug.apk
           if-no-files-found: error
           retention-days: 30
