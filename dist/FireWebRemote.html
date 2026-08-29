@@ -12,10 +12,16 @@
 button,input{font:inherit}.appShell{height:100dvh;max-width:700px;margin:auto;padding:calc(env(safe-area-inset-top) + 8px) 12px calc(env(safe-area-inset-bottom) + 8px);display:grid;grid-template-rows:54px minmax(0,1fr) var(--nav);gap:9px}.header{display:flex;align-items:center;justify-content:space-between;min-width:0}.brand{display:flex;align-items:center;gap:10px;min-width:0}.orb{width:38px;height:38px;border-radius:12px;flex:0 0 auto;background:linear-gradient(145deg,#7d818c,#292b32);box-shadow:inset 0 1px 1px #ffffff45,0 10px 26px #0009}.brandText{min-width:0}.brand h1{margin:0;font-size:22px;line-height:1;letter-spacing:-.04em}.host{font-size:11px;color:#7d7d85;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.state{font-size:11px;font-weight:750;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#18181c;white-space:nowrap;color:#b8b8be}.stage{min-height:0;position:relative}.view{display:none;height:100%;min-height:0}.view.active{display:block}.glass{height:100%;border:1px solid var(--line);border-radius:24px;background:var(--panel);box-shadow:0 22px 70px #0008,inset 0 1px #ffffff09;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);overflow:hidden}.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:7px;border:1px solid var(--line);border-radius:22px;background:#111114e8;box-shadow:0 15px 50px #0008;backdrop-filter:blur(24px)}.navBtn{border:0;border-radius:16px;background:transparent;color:#77777f;font-weight:700;font-size:12px;display:grid;place-items:center;gap:2px}.navBtn b{font-size:20px;line-height:20px;font-weight:600}.navBtn.sel{background:#f2f2f4;color:#101014;box-shadow:0 5px 20px #0008}.navBtn:active{transform:scale(.98)}
 .appsView{display:grid;grid-template-rows:44px minmax(0,1fr) 42px;gap:8px;padding:11px}.appsBar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px}.search{min-width:0;border:1px solid var(--line);background:#09090c;border-radius:13px;color:white;padding:0 12px;outline:none;font-size:12px}.chip{border:1px solid var(--line);background:#212126;color:#ddd;border-radius:13px;padding:0 11px;font-size:11px;font-weight:700}.chip.on{background:#f4f4f5;color:#111}.appGrid{min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:7px}.tile{position:relative;min-width:0;min-height:0;border:1px solid #ffffff0d;border-radius:18px;background:linear-gradient(150deg,#1b1b20,#0c0c10 70%);color:white;padding:7px 5px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;overflow:hidden;box-shadow:inset 0 1px #ffffff08}.tile:active{transform:scale(.965);background:#1e1e23}.tile.hiddenTile{opacity:.65}.iconBox{width:clamp(40px,10vw,58px);height:clamp(40px,10vw,58px);border-radius:14px;background:#25252b;box-shadow:0 9px 25px #0008,inset 0 1px #ffffff15;overflow:hidden;display:grid;place-items:center}.iconBox img{width:100%;height:100%;object-fit:cover}.fallback{font-weight:800;font-size:19px;color:#c9c9d0}.tileName{width:100%;font-size:10px;font-weight:700;line-height:1.15;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}.more{position:absolute;right:4px;top:4px;width:25px;height:25px;border:0;border-radius:9px;background:#0008;color:#aaa;font-weight:900;line-height:1}.sysDot{position:absolute;left:7px;top:7px;width:6px;height:6px;background:#777;border-radius:50%;box-shadow:0 0 0 2px #111}.pager{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:7px}.pageBtn{height:38px;border:1px solid var(--line);background:#202025;color:#fff;border-radius:13px;font-size:18px}.pageInfo{text-align:center;color:#8e8e96;font-size:11px;font-weight:650}.empty{grid-column:1/-1;grid-row:1/-1;display:grid;place-items:center;text-align:center;color:#777;font-size:12px;padding:20px}
 .remoteView{padding:10px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:7px}.sectionTitle{font-size:12px;color:#8d8d95;font-weight:750;text-transform:uppercase;letter-spacing:.08em;padding:2px 4px}.remoteGrid{min-height:0;display:block}.dpadPanel{height:100%;border:1px solid var(--line);border-radius:19px;background:#0c0c10;padding:8px;display:grid;grid-template-rows:minmax(0,1fr) 44px 44px;gap:6px;overflow:hidden}.dpad{width:min(100%,340px);height:auto;max-height:100%;aspect-ratio:1;margin:auto;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);gap:6px;min-width:0;min-height:0}.rbtn{min-width:0;min-height:0;border:1px solid #ffffff12;background:linear-gradient(#29292f,#1b1b20);color:#f7f7f8;border-radius:16px;font-weight:800;font-size:18px;box-shadow:inset 0 1px #ffffff12,0 8px 20px #0005}.rbtn:active{transform:scale(.95);background:#131317}.rbtn.ok{background:#f4f4f5;color:#111}.utilityRow,.volumeRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.utilityRow .rbtn,.volumeRow .rbtn{font-size:11px;border-radius:13px}.volumeRow .rbtn{font-size:10px}.mute{color:#ffb3ae}
-.toolsView{padding:10px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:7px}.toolGrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto minmax(0,1fr) 46px;gap:7px;min-height:0}.toolBtn{min-height:0;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#242429,#151519);color:#fff;text-align:left;padding:10px 11px;font-weight:750;font-size:12px;box-shadow:inset 0 1px #ffffff0d}.toolBtn span{display:block;font-size:9px;font-weight:500;color:#7f7f87;margin-top:3px;line-height:1.2}.toolBtn:active{transform:scale(.98)}.toolBtn.danger{color:#ff8d85;background:#211719}.toolBtn.compact{height:46px;padding:0 12px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px}.timerCard{grid-column:1/-1;border:1px solid var(--line);border-radius:17px;background:#0c0c10;padding:10px;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:9px;min-height:58px}.timerInfo{min-width:76px}.timerTitle{font-size:11px;font-weight:800}.timerState{font-size:9px;color:#8a8a92;margin-top:3px;white-space:nowrap}.timerChoices{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.timerChoice{height:34px;border:1px solid var(--line);border-radius:11px;background:#242429;color:#eee;font-size:10px;font-weight:800}.timerChoice:active{transform:scale(.96)}.timerChoice.cancel{color:#ff9b94;background:#211719}.maintenanceBtn{height:100%}
+.toolsView{padding:10px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:7px}.toolGrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 44px minmax(0,1fr) 44px;gap:7px;min-height:0}.toolBtn{min-height:0;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#242429,#151519);color:#fff;text-align:left;padding:10px 11px;font-weight:750;font-size:12px;box-shadow:inset 0 1px #ffffff0d}.toolBtn span{display:block;font-size:9px;font-weight:500;color:#7f7f87;margin-top:3px;line-height:1.2}.toolBtn:active{transform:scale(.98)}.toolBtn.danger{color:#ff8d85;background:#211719}.toolBtn.compact{height:46px;padding:0 12px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px}.timerCard{grid-column:1/-1;border:1px solid var(--line);border-radius:17px;background:#0c0c10;padding:10px;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:9px;min-height:58px}.timerInfo{min-width:76px}.timerTitle{font-size:11px;font-weight:800}.timerState{font-size:9px;color:#8a8a92;margin-top:3px;white-space:nowrap}.timerChoices{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.timerChoice{height:34px;border:1px solid var(--line);border-radius:11px;background:#242429;color:#eee;font-size:10px;font-weight:800}.timerChoice:active{transform:scale(.96)}.timerChoice.cancel{color:#ff9b94;background:#211719}.maintenanceBtn{height:100%}
 .idle{position:fixed;inset:0;background:radial-gradient(circle at 50% 20%,#24262c,#08080b 45%,#030304);z-index:20;display:none;align-items:center;justify-content:center;padding:28px}.idle.on{display:flex}.idleCard{width:min(390px,100%);border:1px solid var(--line);background:#131317e8;border-radius:28px;padding:30px 22px;text-align:center;box-shadow:0 30px 90px #000}.moon{width:78px;height:78px;border-radius:25px;margin:auto;background:#0a0a0d;display:grid;place-items:center;font-size:32px;box-shadow:inset 0 1px #ffffff12,0 18px 50px #000}.idle h2{font-size:28px;letter-spacing:-.04em;margin:18px 0 7px}.idle p{font-size:12px;line-height:1.5;color:#777780;margin:0 0 22px}.wake{width:100%;border:0;border-radius:17px;background:#f5f5f7;color:#111;padding:16px;font-weight:800}.sheetShade{position:fixed;inset:0;background:#0009;backdrop-filter:blur(7px);z-index:30;display:none;align-items:flex-end}.sheetShade.on{display:flex}.sheet{width:min(700px,100%);margin:auto;background:#17171bef;border:1px solid #ffffff17;border-radius:25px 25px 0 0;padding:12px 14px calc(env(safe-area-inset-bottom) + 14px);box-shadow:0 -25px 80px #000}.grab{width:36px;height:4px;border-radius:9px;background:#555;margin:0 auto 12px}.sheetHead{display:flex;align-items:center;gap:11px;padding:0 3px 12px}.sheetIcon{width:46px;height:46px;border-radius:13px;background:#29292f;object-fit:cover}.sheetName{font-size:16px;font-weight:800}.sheetPkg{font-size:10px;color:#777;font-family:ui-monospace,Menlo,monospace;margin-top:3px;word-break:break-all}.sheetBtns{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.sheetBtn{border:1px solid var(--line);background:#29292f;color:#fff;border-radius:14px;padding:13px 8px;font-weight:750;font-size:12px}.sheetBtn.hide{color:#ffb36c}.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 83px);transform:translate(-50%,14px);z-index:50;background:#29292fdd;border:1px solid #ffffff18;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;transition:.18s;pointer-events:none;max-width:85%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toast.on{opacity:1;transform:translate(-50%,0)}
 @media(max-height:700px){:root{--nav:60px}.appShell{grid-template-rows:48px minmax(0,1fr) var(--nav);gap:6px}.brand h1{font-size:19px}.orb{width:33px;height:33px}.appsView{grid-template-rows:39px minmax(0,1fr) 37px;padding:8px}.appGrid{gap:5px}.tile{border-radius:14px;padding:4px}.iconBox{width:38px;height:38px;border-radius:11px}.tileName{font-size:9px}.remoteView,.toolsView{padding:8px}.dpadPanel,.sidePanel{padding:7px}.toolBtn{padding:10px}.nav{padding:5px}.navBtn b{font-size:17px}}
 @media(max-width:380px){.appGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.appsBar{grid-template-columns:minmax(0,1fr) auto}.chip.sys{display:none}.dpadPanel{padding:6px;grid-template-rows:minmax(0,1fr) 40px 40px}.dpad{gap:5px}.rbtn{border-radius:14px}.utilityRow,.volumeRow{gap:4px}.timerInfo{min-width:65px}.timerChoices{gap:3px}}
+
+/* synced arrange mode */
+.tile.arrangeMode{outline:1px dashed #ffffff38;cursor:move}.more{display:none}.tile.arrangeMode .more{display:none}.tile.arrangePicked{outline:2px solid #fff;transform:scale(.96);box-shadow:0 0 0 4px #ffffff18,inset 0 1px #ffffff18}.chip.arrange.on{background:#f4f4f5;color:#111}.themeCard{grid-column:1/-1;height:44px;border:1px solid var(--line);border-radius:15px;background:#0c0c10;padding:5px 6px;display:grid;grid-template-columns:auto 1fr 1fr;gap:5px;align-items:center}.themeLabel{font-size:10px;font-weight:800;padding:0 5px;color:#9a9aa2}.themeBtn{height:32px;border:1px solid var(--line);border-radius:10px;background:#242429;color:#aaa;font-size:10px;font-weight:800}.themeBtn.on{background:#f4f4f5;color:#111}
+/* Pink / girly theme */
+body.pinkTheme{--panel:#2b1728e8;--panel2:#1d0d1b;--line:#ffb6df25;--text:#fff5fb;--muted:#d69abd;--danger:#ff7faf;background:radial-gradient(circle at 50% -12%,#ff83c6 0,#71375e 25%,#261020 55%,#090508 88%)}body.pinkTheme .orb{background:linear-gradient(145deg,#ffd5eb,#ff78bd);box-shadow:inset 0 1px 1px #fff8,0 10px 28px #ff4aaa30}body.pinkTheme .glass,body.pinkTheme .nav{border-color:#ffb8dd26;background:#241320e8}body.pinkTheme .navBtn.sel,body.pinkTheme .rbtn.ok,body.pinkTheme .chip.on,body.pinkTheme .themeBtn.on{background:linear-gradient(145deg,#fff2fa,#ffc4e5);color:#5e183f}body.pinkTheme .tile{background:linear-gradient(150deg,#48203e,#1d0d1a 72%);border-color:#ffc3e41c}body.pinkTheme .iconBox{background:#5a294c;box-shadow:0 9px 25px #0008,inset 0 1px #ffd8ec25}body.pinkTheme .rbtn,body.pinkTheme .toolBtn,body.pinkTheme .timerChoice{background:linear-gradient(#4a2440,#291222);border-color:#ffc0e31d}body.pinkTheme .timerCard,body.pinkTheme .themeCard,body.pinkTheme .dpadPanel{background:#1b0c18;border-color:#ffb8dc22}body.pinkTheme .state{background:#3a1d33;border-color:#ffbadf24;color:#ffd8ed}body.pinkTheme .search{background:#160a14;border-color:#ffb8dc20}body.pinkTheme .toolBtn.danger,body.pinkTheme .timerChoice.cancel{background:#47182d;color:#ff9bc8}body.pinkTheme .mute{color:#ff9ccb}body.pinkTheme .idle{background:radial-gradient(circle at 50% 20%,#8d3f70,#35142d 45%,#080407)}body.pinkTheme .idleCard{background:#2a1425e8;border-color:#ffc0e328}
+.tile{-webkit-user-select:none;user-select:none}.tile.arrangeMode{animation:appWiggle .18s ease-in-out infinite alternate}@keyframes appWiggle{from{transform:rotate(-.5deg)}to{transform:rotate(.5deg)}}
 </style>
 </head>
 <body>
@@ -24,7 +30,7 @@ button,input{font:inherit}.appShell{height:100dvh;max-width:700px;margin:auto;pa
 <main class="stage">
 <section id="appsView" class="view active"><div class="glass appsView"><div class="appsBar"><input id="search" class="search" placeholder="Search apps…" autocomplete="off"><button id="hiddenChip" class="chip">Hidden 0</button><button id="systemChip" class="chip sys">System</button></div><div id="appGrid" class="appGrid"><div class="empty">Loading apps…</div></div><div class="pager"><button class="pageBtn" id="prevPage">‹</button><div id="pageInfo" class="pageInfo">1 / 1</div><button class="pageBtn" id="nextPage">›</button></div></div></section>
 <section id="remoteView" class="view"><div class="glass remoteView"><div class="sectionTitle">Remote</div><div class="remoteGrid"><div class="dpadPanel"><div class="dpad"><span></span><button class="rbtn" data-key="up">▲</button><span></span><button class="rbtn" data-key="left">◀</button><button class="rbtn ok" data-key="ok">OK</button><button class="rbtn" data-key="right">▶</button><span></span><button class="rbtn" data-key="down">▼</button><span></span></div><div class="utilityRow"><button class="rbtn" data-key="back">Back</button><button class="rbtn" data-key="home">Home</button><button class="rbtn" data-key="menu">Menu</button></div><div class="volumeRow"><button class="rbtn" data-key="voldown">VOL −</button><button class="rbtn mute" data-key="mute">MUTE</button><button class="rbtn" data-key="volup">VOL +</button></div></div></div></div></section>
-<section id="toolsView" class="view"><div class="glass toolsView"><div class="sectionTitle">Tools</div><div class="toolGrid"><div class="timerCard"><div class="timerInfo"><div class="timerTitle">Sleep Timer</div><div id="sleepTimerState" class="timerState">Off</div></div><div class="timerChoices"><button class="timerChoice" data-sleep-hours="1">1h</button><button class="timerChoice" data-sleep-hours="2">2h</button><button class="timerChoice" data-sleep-hours="3">3h</button><button id="sleepTimerCancel" class="timerChoice cancel">OFF</button></div></div><button class="toolBtn maintenanceBtn" data-tool="kill-background">Clean Background<span>Kill cached/background apps</span></button><button class="toolBtn maintenanceBtn" data-tool="trim-cache">Trim Caches<span>Reclaim app cache</span></button><button id="updateBtn" class="toolBtn compact">Update</button><button class="toolBtn danger compact" data-tool="sleep">OFF</button></div></div></section>
+<section id="toolsView" class="view"><div class="glass toolsView"><div class="sectionTitle">Tools</div><div class="toolGrid"><div class="timerCard"><div class="timerInfo"><div class="timerTitle">Sleep Timer</div><div id="sleepTimerState" class="timerState">Off</div></div><div class="timerChoices"><button class="timerChoice" data-sleep-hours="1">1h</button><button class="timerChoice" data-sleep-hours="2">2h</button><button class="timerChoice" data-sleep-hours="3">3h</button><button id="sleepTimerCancel" class="timerChoice cancel">OFF</button></div></div><div class="themeCard"><span class="themeLabel">Theme</span><button class="themeBtn" data-theme="dark">Dark</button><button class="themeBtn" data-theme="pink">Pink</button></div><button class="toolBtn maintenanceBtn" data-tool="kill-background">Clean Background<span>Kill cached/background apps</span></button><button class="toolBtn maintenanceBtn" data-tool="trim-cache">Trim Caches<span>Reclaim app cache</span></button><button id="updateBtn" class="toolBtn compact">Update</button><button class="toolBtn danger compact" data-tool="sleep">OFF</button></div></div></section>
 </main>
 <nav class="nav"><button class="navBtn sel" data-tab="apps"><b>▦</b>Apps</button><button class="navBtn" data-tab="remote"><b>✣</b>Remote</button><button class="navBtn" data-tab="tools"><b>⌁</b>Tools</button></nav>
 </div>
@@ -32,7 +38,7 @@ button,input{font:inherit}.appShell{height:100dvh;max-width:700px;margin:auto;pa
 <div id="sheetShade" class="sheetShade"><div class="sheet"><div class="grab"></div><div class="sheetHead"><img id="sheetIcon" class="sheetIcon"><div style="min-width:0"><div id="sheetName" class="sheetName"></div><div id="sheetPkg" class="sheetPkg"></div></div></div><div class="sheetBtns"><button id="sheetOpen" class="sheetBtn">Open</button><button id="sheetStop" class="sheetBtn">Stop</button><button id="sheetHide" class="sheetBtn hide">Hide</button></div></div></div>
 <div id="toast" class="toast"></div>
 <script>
-const S={apps:[],idle:true,remain:0,sleepTimer:0,page:0,system:false,showHidden:false,selected:null,hidden:new Set(JSON.parse(localStorage.getItem('hiddenApps')||'[]')),lastUse:Date.now(),lastPing:0,debugTapCount:0,debugTapAt:0};
+const S={apps:[],idle:true,remain:0,sleepTimer:0,page:0,system:false,showHidden:false,arrange:false,selected:null,selectedArrange:null,hidden:new Set(),order:[],theme:'dark',uiLoaded:false,lastUse:Date.now(),lastPing:0,debugTapCount:0,debugTapAt:0};
 const $=id=>document.getElementById(id);
 const pageSize=()=>innerWidth<=380?9:12;
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -40,13 +46,19 @@ function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clear
 async function api(url,quiet=false){const r=await fetch(url,{cache:'no-store'});let d={};try{d=await r.json()}catch(e){}if(r.status===423){showIdle();throw new Error('Ultra Idle')}if(!d.ok)throw new Error(d.error||'Request failed');return d}
 function showIdle(){S.idle=true;$('idle').classList.add('on');$('state').textContent='Ultra Idle'}
 function showActive(){S.idle=false;$('idle').classList.remove('on')}
-function saveHidden(){localStorage.setItem('hiddenApps',JSON.stringify([...S.hidden]));$('hiddenChip').textContent='Hidden '+S.hidden.size}
+function saveHidden(){$('hiddenChip').textContent='Hidden '+S.hidden.size}
+async function persistHidden(){try{await api('/api/ui-state?action=hidden&value='+encodeURIComponent([...S.hidden].join(',')))}catch(e){toast('Sync failed')}}
+async function persistOrder(){try{await api('/api/ui-state?action=order&value='+encodeURIComponent(S.order.join(',')))}catch(e){toast('Sync failed')}}
+function applyTheme(t){S.theme=t==='pink'?'pink':'dark';document.body.classList.toggle('pinkTheme',S.theme==='pink');document.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('on',b.dataset.theme===S.theme))}
+async function setTheme(t){applyTheme(t);try{await api('/api/ui-state?action=theme&value='+encodeURIComponent(S.theme));toast(S.theme==='pink'?'Pink theme ✦':'Dark theme')}catch(e){toast('Theme sync failed')}}
+function ensureOrder(){const known=new Set(S.order);const missing=S.apps.filter(a=>!known.has(a.package)).sort((a,b)=>a.name.localeCompare(b.name));if(!S.order.length){const pin={'org.smarttube.stable':0,'net.vypn.app':1};missing.sort((a,b)=>(pin[a.package]??99)-(pin[b.package]??99)||a.name.localeCompare(b.name))}missing.forEach(a=>S.order.push(a.package));S.order=S.order.filter(p=>S.apps.some(a=>a.package===p))}
+async function loadUiState(render=true){try{const d=await api('/api/ui-state');S.order=Array.isArray(d.order)?d.order:[];S.hidden=new Set(Array.isArray(d.hidden)?d.hidden:[]);applyTheme(d.theme||'dark');S.uiLoaded=true;if(S.apps.length){ensureOrder();if(render)renderApps()}else saveHidden()}catch(e){}}
 function noteUse(){if(S.idle)return;S.lastUse=Date.now();S.remain=90000;if(Date.now()-S.lastPing>1800){S.lastPing=Date.now();fetch('/api/keepalive',{cache:'no-store'}).catch(()=>{})}}
 ['pointerdown','touchstart','keydown','input'].forEach(ev=>document.addEventListener(ev,noteUse,{capture:true,passive:ev!=='keydown'}));
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)noteUse()});
 setInterval(()=>{if(!S.idle&&!document.hidden&&Date.now()-S.lastUse<90000&&Date.now()-S.lastPing>7000)noteUse()},4000);
-function filteredApps(){const q=$('search').value.trim().toLowerCase();let a=S.apps.filter(x=>(S.system||!x.system)&&(S.showHidden?S.hidden.has(x.package):!S.hidden.has(x.package))&&(x.name.toLowerCase().includes(q)||x.package.toLowerCase().includes(q)));const pin={'org.smarttube.stable':0,'net.vypn.app':1};a.sort((x,y)=>(pin[x.package]??99)-(pin[y.package]??99)||x.name.localeCompare(y.name));return a}
-function renderApps(){const a=filteredApps(),ps=pageSize(),pages=Math.max(1,Math.ceil(a.length/ps));S.page=Math.max(0,Math.min(S.page,pages-1));const part=a.slice(S.page*ps,S.page*ps+ps);$('appGrid').innerHTML=part.length?part.map(x=>`<button class="tile ${S.showHidden?'hiddenTile':''}" data-open="${esc(x.package)}"><span class="iconBox"><img loading="lazy" src="/api/icon?package=${encodeURIComponent(x.package)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" style="display:none">${esc((x.name||'?').slice(0,1).toUpperCase())}</span></span><span class="tileName">${esc(x.name)}</span>${x.system?'<span class="sysDot"></span>':''}<span class="more" data-more="${esc(x.package)}">•••</span></button>`).join(''):'<div class="empty">'+(S.showHidden?'No hidden apps.':'No matching apps.')+'</div>';$('pageInfo').textContent=(S.page+1)+' / '+pages+' · '+a.length+' apps';$('prevPage').disabled=S.page===0;$('nextPage').disabled=S.page>=pages-1;saveHidden()}
+function filteredApps(){const q=$('search').value.trim().toLowerCase();ensureOrder();const pos=new Map(S.order.map((p,i)=>[p,i]));let a=S.apps.filter(x=>(S.system||!x.system)&&(S.showHidden?S.hidden.has(x.package):!S.hidden.has(x.package))&&(x.name.toLowerCase().includes(q)||x.package.toLowerCase().includes(q)));a.sort((x,y)=>(pos.get(x.package)??9999)-(pos.get(y.package)??9999)||x.name.localeCompare(y.name));return a}
+function renderApps(){const a=filteredApps(),ps=pageSize(),pages=Math.max(1,Math.ceil(a.length/ps));S.page=Math.max(0,Math.min(S.page,pages-1));const part=a.slice(S.page*ps,S.page*ps+ps);$('appGrid').innerHTML=part.length?part.map(x=>`<button class="tile ${S.showHidden?'hiddenTile':''} ${S.arrange?'arrangeMode':''} ${S.selectedArrange===x.package?'arrangePicked':''}" data-open="${esc(x.package)}"><span class="iconBox"><img loading="lazy" src="/api/icon?package=${encodeURIComponent(x.package)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" style="display:none">${esc((x.name||'?').slice(0,1).toUpperCase())}</span></span><span class="tileName">${esc(x.name)}</span>${x.system?'<span class="sysDot"></span>':''}<span class="more" data-more="${esc(x.package)}">•••</span></button>`).join(''):'<div class="empty">'+(S.showHidden?'No hidden apps.':'No matching apps.')+'</div>';$('pageInfo').textContent=(S.page+1)+' / '+pages+' · '+a.length+' apps';$('prevPage').disabled=S.page===0;$('nextPage').disabled=S.page>=pages-1;saveHidden()}
 function findApp(p){return S.apps.find(x=>x.package===p)}
 function openSheet(p){const a=findApp(p);if(!a)return;S.selected=a;$('sheetName').textContent=a.name;$('sheetPkg').textContent=a.package;$('sheetIcon').src='/api/icon?package='+encodeURIComponent(a.package);$('sheetOpen').disabled=!a.launchable;$('sheetHide').textContent=S.hidden.has(a.package)?'Unhide':'Hide';$('sheetShade').classList.add('on');noteUse()}
 function closeSheet(){$('sheetShade').classList.remove('on');S.selected=null}
@@ -58,17 +70,97 @@ function renderSleepTimer(){$('sleepTimerState').textContent=S.sleepTimer>0?'Tur
 async function setSleepTimer(hours){try{if(hours===1){const now=Date.now();S.debugTapCount=(now-S.debugTapAt<2500)?S.debugTapCount+1:1;S.debugTapAt=now;if(S.debugTapCount>=5){S.debugTapCount=0;const d=await api('/api/sleep-timer?action=debug');S.sleepTimer=d.remainingMs||60000;renderSleepTimer();toast(d.message||'Sleep timer set');return}}else{S.debugTapCount=0}const d=await api('/api/sleep-timer?action=set&hours='+hours);S.sleepTimer=d.remainingMs||hours*3600000;renderSleepTimer();toast(d.message||('Sleep in '+hours+'h'))}catch(e){toast(e.message)}}
 async function cancelSleepTimer(){try{const d=await api('/api/sleep-timer?action=cancel');S.sleepTimer=0;renderSleepTimer();toast(d.message||'Sleep timer cancelled')}catch(e){toast(e.message)}}
 async function updateApp(){if(!confirm('Download and install the latest Fire Web Remote APK?'))return;const b=$('updateBtn');b.disabled=true;try{toast('Downloading update…');const d=await api('/api/update');toast(d.message||'Restarting…');setTimeout(()=>location.reload(),9000)}catch(e){b.disabled=false;toast(e.message||'Update failed')}}
-async function loadApps(){try{const d=await api('/api/apps');S.apps=d.apps||[];renderApps()}catch(e){toast(e.message)}}
+async function loadApps(){try{const d=await api('/api/apps');S.apps=d.apps||[];ensureOrder();renderApps()}catch(e){toast(e.message)}}
 async function wake(){try{const d=await api('/api/wake');showActive();S.remain=d.remainingMs||30000;S.lastUse=Date.now();S.lastPing=Date.now();await loadApps();toast('Awake')}catch(e){toast(e.message)}}
-async function sync(){try{const d=await api('/api/status',true);S.remain=d.remainingMs||0;S.sleepTimer=d.sleepTimerRemainingMs||0;renderSleepTimer();$('host').textContent=d.ip+':'+d.port;if(d.idle)showIdle();else{showActive();if(!S.apps.length)await loadApps()}}catch(e){$('state').textContent='Offline'}}
+async function sync(){try{if(!S.uiLoaded)await loadUiState(false);const d=await api('/api/status',true);S.remain=d.remainingMs||0;S.sleepTimer=d.sleepTimerRemainingMs||0;renderSleepTimer();$('host').textContent=d.ip+':'+d.port;if(d.idle)showIdle();else{showActive();if(!S.apps.length)await loadApps()}}catch(e){$('state').textContent='Offline'}}
 function setTab(t){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.navBtn').forEach(b=>b.classList.toggle('sel',b.dataset.tab===t));$(t+'View').classList.add('active');noteUse()}
-$('search').addEventListener('input',()=>{S.page=0;renderApps()});$('hiddenChip').onclick=()=>{S.showHidden=!S.showHidden;S.page=0;$('hiddenChip').classList.toggle('on',S.showHidden);renderApps()};$('systemChip').onclick=()=>{S.system=!S.system;S.page=0;$('systemChip').classList.toggle('on',S.system);renderApps()};$('prevPage').onclick=()=>{S.page--;renderApps();noteUse()};$('nextPage').onclick=()=>{S.page++;renderApps();noteUse()};
+$('search').addEventListener('input',()=>{S.page=0;renderApps()});$('hiddenChip').onclick=()=>{S.showHidden=!S.showHidden;S.page=0;$('hiddenChip').classList.toggle('on',S.showHidden);renderApps()};$('systemChip').onclick=()=>{S.system=!S.system;S.page=0;$('systemChip').classList.toggle('on',S.system);renderApps()};document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>setTheme(b.dataset.theme));$('prevPage').onclick=()=>{S.page--;renderApps();noteUse()};$('nextPage').onclick=()=>{S.page++;renderApps();noteUse()};
 document.querySelectorAll('.navBtn').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));document.querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>remote(b.dataset.key));document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>tool(b.dataset.tool));document.querySelectorAll('[data-launch]').forEach(b=>b.onclick=()=>action('launch',b.dataset.launch));document.querySelectorAll('[data-sleep-hours]').forEach(b=>b.onclick=()=>setSleepTimer(Number(b.dataset.sleepHours)));$('sleepTimerCancel').onclick=cancelSleepTimer;$('updateBtn').onclick=updateApp;
-$('appGrid').onclick=e=>{const more=e.target.closest('[data-more]');if(more){e.stopPropagation();openSheet(more.dataset.more);return}const tile=e.target.closest('[data-open]');if(tile){const a=findApp(tile.dataset.open);if(S.showHidden)openSheet(tile.dataset.open);else if(a&&a.launchable)action('launch',tile.dataset.open);else openSheet(tile.dataset.open)}};
-$('sheetShade').onclick=e=>{if(e.target===$('sheetShade'))closeSheet()};$('sheetOpen').onclick=()=>{if(S.selected){action('launch',S.selected.package);closeSheet()}};$('sheetStop').onclick=()=>{if(S.selected){action('force-stop',S.selected.package);closeSheet()}};$('sheetHide').onclick=()=>{if(!S.selected)return;const p=S.selected.package;if(S.hidden.has(p))S.hidden.delete(p);else S.hidden.add(p);saveHidden();closeSheet();renderApps()};$('wakeBtn').onclick=wake;
+let appTapTimer=null;
+let appTapPackage=null;
+let appTapAt=0;
+let appLongTimer=null;
+let appLongTriggered=false;
+
+function finishMove(targetPkg){
+  if(!S.selectedArrange){S.arrange=false;renderApps();return}
+  ensureOrder();
+  const a=S.order.indexOf(S.selectedArrange);
+  const b=S.order.indexOf(targetPkg);
+  if(a>=0&&b>=0&&a!==b){
+    const tmp=S.order[a];
+    S.order[a]=S.order[b];
+    S.order[b]=tmp;
+    persistOrder();
+    toast('Position saved');
+  }
+  S.arrange=false;
+  S.selectedArrange=null;
+  renderApps();
+}
+
+$('appGrid').addEventListener('pointerdown',e=>{
+  const tile=e.target.closest('[data-open]');
+  if(!tile)return;
+  const pkg=tile.dataset.open;
+  appLongTriggered=false;
+  clearTimeout(appLongTimer);
+  appLongTimer=setTimeout(()=>{
+    appLongTriggered=true;
+    clearTimeout(appTapTimer);
+    appTapTimer=null;
+    appTapPackage=null;
+    S.arrange=true;
+    S.selectedArrange=pkg;
+    renderApps();
+    toast('Move app · tap destination');
+  },520);
+});
+
+['pointerup','pointercancel','pointerleave'].forEach(ev=>
+  $('appGrid').addEventListener(ev,()=>clearTimeout(appLongTimer))
+);
+
+$('appGrid').onclick=e=>{
+  const tile=e.target.closest('[data-open]');
+  if(!tile)return;
+  const pkg=tile.dataset.open;
+
+  if(appLongTriggered){
+    appLongTriggered=false;
+    return;
+  }
+
+  if(S.arrange){
+    finishMove(pkg);
+    return;
+  }
+
+  const now=Date.now();
+  if(appTapPackage===pkg && now-appTapAt<340){
+    clearTimeout(appTapTimer);
+    appTapTimer=null;
+    appTapPackage=null;
+    appTapAt=0;
+    openSheet(pkg);
+    return;
+  }
+
+  clearTimeout(appTapTimer);
+  appTapPackage=pkg;
+  appTapAt=now;
+  appTapTimer=setTimeout(()=>{
+    appTapTimer=null;
+    appTapPackage=null;
+    const app=findApp(pkg);
+    if(app&&app.launchable) action('launch',pkg);
+    else openSheet(pkg);
+  },260);
+};
+$('sheetShade').onclick=e=>{if(e.target===$('sheetShade'))closeSheet()};$('sheetOpen').onclick=()=>{if(S.selected){action('launch',S.selected.package);closeSheet()}};$('sheetStop').onclick=()=>{if(S.selected){action('force-stop',S.selected.package);closeSheet()}};$('sheetHide').onclick=()=>{if(!S.selected)return;const p=S.selected.package;if(S.hidden.has(p))S.hidden.delete(p);else S.hidden.add(p);saveHidden();persistHidden();closeSheet();renderApps()};$('wakeBtn').onclick=wake;
 addEventListener('resize',()=>{S.page=0;renderApps()});
 setInterval(()=>{if(S.sleepTimer>0){S.sleepTimer=Math.max(0,S.sleepTimer-1000);renderSleepTimer();if(S.sleepTimer===0)setTimeout(sync,1200)}if(!S.idle){S.remain=Math.max(0,S.remain-1000);$('state').textContent='Awake · '+Math.ceil(S.remain/1000)+'s';if(S.remain<=0)sync()}},1000);
-saveHidden();sync();
+saveHidden();sync();setInterval(()=>{if(!document.hidden&&!S.arrange)loadUiState(true)},10000);
 </script>
 </body>
 </html>
