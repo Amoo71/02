@@ -42,15 +42,16 @@ jobs:
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
 
-      - name: Publish APK files
+      - name: Publish build files
         run: |
           mkdir -p dist
           cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote.apk
           cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.2.apk
+          cp app/src/main/assets/index.html dist/FireWebRemote.html
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.2.apk
-          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.2 APK [skip ci]"
+          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.2.apk dist/FireWebRemote.html
+          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.2 build [skip ci]"
           git push
 
       - name: Upload APK artifact
