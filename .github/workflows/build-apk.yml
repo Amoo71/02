@@ -45,6 +45,12 @@ jobs:
       - name: Apply v2.4 ADB and idle fix
         run: python3 scripts/patch_v24.py
 
+      - name: Apply v2.5 sync and theme
+        run: python3 scripts/patch_v25.py
+
+      - name: Apply v2.5 app gestures
+        run: python3 scripts/patch_v25_gestures.py
+
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
 
@@ -52,18 +58,18 @@ jobs:
         run: |
           mkdir -p dist
           cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote.apk
-          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.4.apk
+          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.5.apk
           cp app/src/main/assets/index.html dist/FireWebRemote.html
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.4.apk dist/FireWebRemote.html
-          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.4 build [skip ci]"
+          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.5.apk dist/FireWebRemote.html
+          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.5 build [skip ci]"
           git push
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FireWebRemote-2.4-APK
+          name: FireWebRemote-2.5-APK
           path: dist/FireWebRemote.apk
           if-no-files-found: error
           retention-days: 30
