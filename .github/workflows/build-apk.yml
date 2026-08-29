@@ -54,6 +54,9 @@ jobs:
       - name: Apply v2.6 self-healing ADB manager
         run: python3 scripts/patch_v26.py
 
+      - name: Preserve state across repair reinstalls
+        run: python3 scripts/patch_v26_state.py
+
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
 
