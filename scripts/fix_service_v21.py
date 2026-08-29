@@ -17,6 +17,7 @@ needle = '            cachedIndex = new String(out.toByteArray(), "UTF-8");\n   
 replacement = '''            cachedIndex = new String(out.toByteArray(), "UTF-8");
             String uiPatch = "<script>(function(){try{" +
                     "var g=document.querySelector('#toolsView .toolGrid');if(!g)return;" +
+                    "if(document.getElementById('updateBtn'))return;" +
                     "var h=g.querySelector('[data-key=\\\"home\\\"]');if(h)h.remove();" +
                     "var b=g.querySelector('[data-key=\\\"back\\\"]');if(b)b.remove();" +
                     "var sl=g.querySelector('[data-tool=\\\"sleep\\\"]');if(sl)sl.style.gridColumn='auto';" +
