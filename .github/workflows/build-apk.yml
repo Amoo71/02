@@ -30,11 +30,14 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - name: Apply v2.1 source fix
+      - name: Apply source fix
         run: python3 scripts/fix_service_v21.py
 
       - name: Apply compact remote layout
         run: python3 scripts/patch_remote_layout.py
+
+      - name: Add sleep timer
+        run: python3 scripts/add_sleep_timer.py
 
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
@@ -43,17 +46,17 @@ jobs:
         run: |
           mkdir -p dist
           cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote.apk
-          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.1.apk
+          cp app/build/outputs/apk/debug/app-debug.apk dist/FireWebRemote-2.2.apk
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.1.apk
-          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.1 APK [skip ci]"
+          git add -f dist/FireWebRemote.apk dist/FireWebRemote-2.2.apk
+          git diff --cached --quiet || git commit -m "Publish FireWebRemote 2.2 APK [skip ci]"
           git push
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FireWebRemote-2.1-APK
+          name: FireWebRemote-2.2-APK
           path: dist/FireWebRemote.apk
           if-no-files-found: error
           retention-days: 30
