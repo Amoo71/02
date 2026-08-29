@@ -10,8 +10,8 @@ android {
         applicationId "dev.fireweb.remote"
         minSdk 22
         targetSdk 28
-        versionCode 8
-        versionName "2.6"
+        versionCode 9
+        versionName "2.7"
     }
 
     buildTypes {
