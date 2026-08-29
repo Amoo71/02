@@ -66,6 +66,9 @@ jobs:
       - name: Apply v2.9 CLI themes and swipe remote
         run: python3 scripts/patch_v29_cli_swipe.py
 
+      - name: Apply v2.9 Lightning TV volume control
+        run: python3 scripts/patch_v29_lightning_volume.py
+
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
 
